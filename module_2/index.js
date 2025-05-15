@@ -50,9 +50,35 @@
 // for(let i =0;break point;i++)
 // vd:
 
-let a = 0;
-for (let i = 0; i < 10; i += 2) {
-  console.log(`\nDòng ${a + 1}================> i=${i}`);
-  console.log("số ", i + 1);
-  ++a;
-}
+// const getElement = document.getElementsByTagName("div")[0];
+
+// const getElementById = document.getElementById("testing-dom");
+
+// console.log(getElement, getElement.innerText);
+
+// getElementById.innerText = "Hello xin chào Tuyên";
+// getElementById.innerHTML = `<li>
+//         <ul>1</ul>
+//         <ul>2</ul>
+//         <ul>3</ul>
+//     </li>`;
+
+// getElementById.style = "color:red";
+
+const getContainerElement = document.getElementsByClassName("container")[0];
+
+const tableElement = document.createElement("table");
+
+const trElement = document.createElement("tr");
+
+const thElement = document.createElement("th");
+
+const tdElement = document.createElement("td");
+
+trElement.innerHTML = ` <th>STT</th>
+            <th>Họ và tên</th>
+            <th>Tuổi</th>`;
+
+tableElement.appendChild(trElement);
+tableElement.classList.add("table-deco");
+getContainerElement.appendChild(tableElement);
