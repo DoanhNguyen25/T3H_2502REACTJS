@@ -1,34 +1,53 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+
+import { useRoutes } from "react-router-dom";
 import "./App.css";
+import MainLayout from "./layout/MainLayout";
+import AboutPage from "./page/AboutPage";
+import HomePage from "./page/HomePage";
+import LoginPage from "./page/LoginPage";
+import NewsDetail from "./page/NewsDetail";
+import NewsPage from "./page/NewsPage";
 
 function App() {
-  const [count, setCount] = useState(0);
-
+  const elementsRoutes = useRoutes([
+    {
+      path: "/",
+      element: <MainLayout />,
+      children: [
+        { path: "", element: <HomePage /> },
+        { path: "about", element: <AboutPage /> },
+        {
+          path: "news",
+          element: <NewsPage />,
+          children: [{ path: ":newsId", element: <NewsDetail /> }],
+        },
+      ],
+    },
+    {
+      path: "login",
+      element: <LoginPage />,
+      children: [],
+    },
+    {
+      path: "*",
+      element: <>Not Found</>,
+      children: [],
+    },
+  ]);
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1 className="text-red-500">Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    // <Routes>
+    //   <Route path="/" element={<MainLayout />}>
+    //     <Route path="/" element={<HomePage />} />
+    //     <Route path="/about" element={<About />}>
+    //       <Route path="me" element={<h1>About Me</h1>} />
+    //     </Route>
+    //     <Route path="/news" element={<News />}>
+    //       <Route path=":id" element={<NewsDetail />} />
+    //     </Route>
+    //     <Route path="*" element={<h1>404 Not Found</h1>} />
+    //   </Route>
+    // </Routes>
+    <div>{elementsRoutes}</div>
   );
 }
 
